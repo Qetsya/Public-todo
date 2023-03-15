@@ -6,5 +6,5 @@ const document = {
 };
 
 export const listJSON = {
-    documents: [document, document, document],
+    documents: [],
 }
