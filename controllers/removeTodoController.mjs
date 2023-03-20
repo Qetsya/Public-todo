@@ -1,6 +1,6 @@
 import { listJSON } from "../data/list.mjs";
 
-export const removeTodoController = (req, res) => {
+export const removeTodoController = (req, response) => {
     //ILGESNIS BUDAS
     // let deletedCount = 0;
     // const { documents } = listJSON;
@@ -22,11 +22,20 @@ export const removeTodoController = (req, res) => {
     const { documents } = listJSON;
     const requestedDeleteId = req.body._id;
 
+    const isRequestedIdValid = typeof requestedDeleteId === "string";
+
+    if (!isRequestedIdValid) {
+        response.status(400).json({
+            message: "Invalid delete ID",
+        });
+        return;
+    }
+
     const newDocuments = documents.filter(({ _id }) => _id !== requestedDeleteId);
     const deletedCount = documents.length - newDocuments.length;
     listJSON.documents = newDocuments;
 
-    res.json({
+    response.json({
         deletedCount,
     });
 };
