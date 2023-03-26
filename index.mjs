@@ -3,8 +3,8 @@ import { listController } from "./controllers/listController.mjs";
 import { createTodoController } from "./controllers/createTodoController.mjs";
 import { removeTodoController } from "./controllers/removeTodoController.mjs";
 import { editTodoController } from "./controllers/editTodoController.mjs";
-import {registerController} from "./controllers/registerController.mjs"
-import {loginController} from "./controllers/loginController.mjs"
+import { registerController } from "./controllers/registerController.mjs"
+import { loginController } from "./controllers/loginController.mjs"
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -22,7 +22,7 @@ app.get("/api/list", listController);
 app.post("/api/todo", createTodoController);
 app.delete("/api/todo", removeTodoController);
 app.put("/api/todo", editTodoController);
-app.post("/api/regster", registerController);
+app.post("/api/register", registerController);
 app.post("/api/login", loginController);
 
 app.listen(port, () => {

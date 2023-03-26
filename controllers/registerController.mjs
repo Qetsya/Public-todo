@@ -1,9 +1,10 @@
 import { v4 as createId } from "uuid";
 import { hashPassword } from "../utils/hashing.mjs";
-import {usersList} from "../data/users.mjs";
+import { usersList } from "../data/users.mjs";
 
 export const registerController = async (req, res) => {
   const { email, password } = req.body;
+
   const isEmail = typeof email === "string";
   const isPassword = typeof password === "string";
 
@@ -14,7 +15,7 @@ export const registerController = async (req, res) => {
 
   const hasUser = usersList.some((user) => user.email === email);
 
-  if(hasUser) {
+  if (hasUser) {
     res.status(400).json({ message: "User already exists" });
     return;
   }
@@ -24,9 +25,9 @@ export const registerController = async (req, res) => {
     password: await hashPassword(password),
   };
 
-  userList.push(user);
+  usersList.push(user);
 
-  console.log(`register userList `, userList)
+  console.log(`register userList `, usersList)
 
   res.json({ message: "ok" });
 };
