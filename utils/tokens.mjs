@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
 export function generateToken(userId) {
-const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
 const data = {
     id: userId,
@@ -11,4 +11,9 @@ const data = {
 
 const token = jwt.sign(data, jwtSecretKey);
 return token;
+}
+
+export function decodeToken(token) {
+    const data = jwt.verify(token, jwtSecretKey);
+    return data;
 }
