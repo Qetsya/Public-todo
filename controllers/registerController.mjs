@@ -6,7 +6,7 @@ export const registerController = async (req, res) => {
   const { email, password } = req.body;
 
   const isEmail = typeof email === "string";
-  const isPassword = typeof password === "string";
+  const isPassword = typeof password === "string" && password.length >= 3;
 
   if (!isEmail || !isPassword) {
     res.status(400).json({ message: "Bad register data" });
@@ -27,7 +27,7 @@ export const registerController = async (req, res) => {
 
   usersList.push(user);
 
-  console.log(`register userList `, usersList)
+  console.log(`register userList `, usersList);
 
   res.json({ message: "ok" });
 };

@@ -8,19 +8,19 @@ import { loginController } from "./controllers/loginController.mjs"
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config(); //turi buti paciame virsuje
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
 
-app.use(express.json()); // padaro matoma tik body
-const corsMiddleware = cors(); //nuima cors errora narsyklese
+app.use(express.json());
+const corsMiddleware = cors();
 
 app.use(corsMiddleware);
 app.get("/api/list", listController);
 app.post("/api/todo", createTodoController);
-app.delete("/api/todo", removeTodoController);
+app.delete("/api/todo/:todoItemId", removeTodoController);
 app.put("/api/todo", editTodoController);
 app.post("/api/register", registerController);
 app.post("/api/login", loginController);

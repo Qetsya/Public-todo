@@ -1,34 +1,34 @@
 import { listJSON } from "../data/list.mjs";
 
-export const editTodoController = (request, response) => {
-    const { documents } = listJSON;
+export const editTodoController = (req, res) => {
+  const { documents } = listJSON;
 
-    const { _id, title, description, completed } = request.body;
+  const { _id, title, description, completed } = req.body;
 
-    const isValidId = typeof _id === "string";
-    const isTitleValid = typeof title === "string" && title.length > 5;
-    const isDescriptionValid = typeof description === "string" && description.length > 5;
-    const isCompletedValid = typeof completed === "boolean";
+  const isValidId = typeof _id === "string";
+  const isTitleValid = typeof title === "string" && title.length >= 3;
+  const isDescriptionValid =
+    typeof description === "string" && description.length >= 3;
+  const isCompletedValid = typeof completed === "boolean";
 
-    if (!isValidId || !isTitleValid || !isCompletedValid || !isDescriptionValid) {
-        response.status(400).json({
-            message: "Invalid data",
-        })
-        return;
-    };
+  if (!isValidId || !isTitleValid || !isCompletedValid || !isDescriptionValid) {
+    res.status(400).json({
+      message: "Invalid data",
+    });
+    return;
+  }
 
-    let replacedCount = 0;
-    for (let i = 0; i < documents.length; i++) {
-        const todo = documents[i];
-        if (todo._id !== _id) continue;
+  let replacedCount = 0;
+  for (let i = 0; i < documents.length; i++) {
+    const todo = documents[i];
+    if (todo._id !== _id) continue;
 
-        documents[i] = request.body;
-        replacedCount++;
-    }
+    documents[i] = req.body;
+    replacedCount++;
+  }
 
-    response.json({
-        matchedCount: replacedCount,
-        modifiedCount: replacedCount,
-    })
+  res.json({
+    matchedCount: replacedCount,
+    modifiedCount: replacedCount,
+  });
 };
-
